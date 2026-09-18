@@ -1,0 +1,80 @@
+/* Reutilización de clases para estilo Web App moderno */
+
+.stat-card {
+  background-color: #3c0470;
+  border: 1px solid #7700ff;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: #334155;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-top: 0.5rem;
+  text-shadow: 
+    0 0 5px #9b9b9b,
+    0 0 10px #919292,
+    0 0 20px #9e9e9e,
+    0 0 40px #818181;
+}
+
+.stat-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+
+.stat-badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.75rem;
+}
+
+.chart-card {
+  background-color: #2e0847;
+  border: 1px solid #8b00fc;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(49, 47, 47, 0.158);
+}
+
+.chart-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #f8fafc;
+  text-shadow: 
+    0 0 5px #9b9b9b,
+    0 0 10px #919292,
+    0 0 20px #9e9e9e,
+    0 0 40px #818181;
+}
+
+.chart-container {
+  position: relative;
+  height: 20rem;
+  width: 100%;
+}

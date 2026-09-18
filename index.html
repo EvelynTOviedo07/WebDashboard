@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-900">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Dashboard</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- script para reporte -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-4 md:p-8">
+
+  <div class="max-w-7xl mx-auto space-y-8">
+    
+    <!-- Header Web/App -->
+    <header class="flex justify-between items-center pb-6 border-b border-slate-800">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Dashboard de Rendimiento</h1>
+        <p class="text-slate-400 text-sm mt-1">Métricas de usuarios e ingresos en tiempo real</p>
+      </div>
+      <button id="btnReporte" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer">
+  <i class="fa-solid fa-download mr-1"></i> Descargar Reporte
+</button>
+    </header>
+
+    <!-- 1. Sección de 4 Tarjetas de Estadísticas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      
+      <!-- Tarjeta 1 -->
+      <div class="stat-card">
+        <div class="flex items-center justify-between">
+          <p class="stat-label">Usuarios Totales</p>
+          <div class="stat-icon bg-blue-500/10 text-blue-400">
+            <i class="fa-solid fa-users"></i>
+          </div>
+        </div>
+        <h3 class="stat-value">9,100</h3>
+        <span class="stat-badge text-emerald-400">
+          <i class="fa-solid fa-arrow-trend-up"></i> +12.5% vs mes anterior
+        </span>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <div class="stat-card">
+        <div class="flex items-center justify-between">
+          <p class="stat-label">Ingresos Totales</p>
+          <div class="stat-icon bg-emerald-500/10 text-emerald-400">
+            <i class="fa-solid fa-dollar-sign"></i>
+          </div>
+        </div>
+        <h3 class="stat-value">$29,000</h3>
+        <span class="stat-badge text-emerald-400">
+          <i class="fa-solid fa-arrow-trend-up"></i> +8.2% vs mes anterior
+        </span>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="stat-card">
+        <div class="flex items-center justify-between">
+          <p class="stat-label">Tasa de Conversión</p>
+          <div class="stat-icon bg-purple-500/10 text-purple-400">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+        </div>
+        <h3 class="stat-value">3.42%</h3>
+        <span class="stat-badge text-rose-400">
+          <i class="fa-solid fa-arrow-trend-down"></i> -0.4% vs mes anterior
+        </span>
+      </div>
+
+      <!-- Tarjeta 4 -->
+      <div class="stat-card">
+        <div class="flex items-center justify-between">
+          <p class="stat-label">Sesiones Activas</p>
+          <div class="stat-icon bg-amber-500/10 text-amber-400">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+        </div>
+        <h3 class="stat-value">1,429</h3>
+        <span class="stat-badge text-emerald-400">
+          <i class="fa-solid fa-arrow-trend-up"></i> +5.3% hoy
+        </span>
+      </div>
+
+    </div>
+
+    <!-- 2. Sección de Gráficas -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      
+      <!-- Gráfica de Líneas -->
+      <div class="chart-card">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="chart-title">Crecimiento de Usuarios</h2>
+          <span class="text-xs text-slate-400 bg-slate-800 px-2.5 py-1 rounded-full">2023 - 2024</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="lineChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Gráfica de Barras -->
+      <div class="chart-card">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="chart-title">Ingresos Mensuales ($)</h2>
+          <span class="text-xs text-slate-400 bg-slate-800 px-2.5 py-1 rounded-full">2024</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. Tabla de Datos Detallados -->
+    <div class="chart-card overflow-hidden mt-6">
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <h2 class="chart-title">Desglose Detallado por Mes</h2>
+          <p class="text-xs text-slate-400 mt-1">Comparativa de usuarios e ingresos registrados en 2024</p>
+        </div>
+        <span class="text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-full">Año Fiscal 2024</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-slate-300">
+          <thead class="bg-slate-800/60 text-xs uppercase text-slate-400 border-b border-slate-700">
+            <tr>
+              <th scope="col" class="py-3 px-4">Mes</th>
+              <th scope="col" class="py-3 px-4">Usuarios (2023)</th>
+              <th scope="col" class="py-3 px-4">Usuarios (2024)</th>
+              <th scope="col" class="py-3 px-4">Crecimiento YoY</th>
+              <th scope="col" class="py-3 px-4 text-right">Ingresos ($)</th>
+            </tr>
+          </thead>
+          <tbody id="tablaCuerpo" class="divide-y divide-slate-800">
+            <!-- Se llena dinámicamente desde JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Archivo JavaScript separado -->
+  <script src="jscharts.js"></script>
+  
+</body>
+</html>
